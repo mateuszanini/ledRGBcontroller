@@ -16,8 +16,6 @@ var myApp = new Framework7({
     }
 });
 
-$('.password-modal').on('click', function () {
-    myApp.modalPassword('You password please:', function (password) {
-        myApp.alert('Thank you! Your password is: ' + password);
-    });
-}); 
+myApp.onPageInit('inde', function(page) {
+  app.initialize();
+});

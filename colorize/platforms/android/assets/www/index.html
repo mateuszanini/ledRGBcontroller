@@ -63,15 +63,15 @@
                     </div>
                     <div class="toolbar tabbar tabbar-labels">
                         <div class="toolbar-inner">
-                            <a href="#tab-1" class="tab-link active">
+                            <a href="#tab-1" class="tab-link tabMenu active" id="tabHumor">
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
-                                <span class="tabbar-label">Sensação</span>
+                                <span class="tabbar-label">Humor</span>
                             </a>
-                            <a href="#tab-2" class="tab-link">
+                            <a href="#tab-2" class="tab-link tabMenu" id="tabRgb">
                                 <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i>
                                 <span class="tabbar-label">RGB</span>
                             </a>
-                            <a href="#tab-3" class="tab-link">
+                            <a href="#tab-3" class="tab-link tabMenu" id="tabDht">
                                 <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
                                 <span class="tabbar-label">Temperatura</span>
                             </a>
@@ -81,56 +81,201 @@
 
 
 
-                    <!-- Scrollable page content -->
-                    <div class="page-content hide-navbar-on-scroll">
+                    <!-- Scrollable page content hide-navbar-on-scroll-->
+                    <div class="page-content">
                         <div class="tabs">
-                            <div id="tab-1" class="tab active">
+                            <div id="tab-1" class="tab tabConteudo active">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <label class="label-radio item-content">
+                                            <input type="radio" name="radioOption" class="radioOption" value="humor" checked="checked">
+                                            <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                            <div class="item-inner">
+                                              <div class="item-title">Ativar controle por Humor</div>
+                                            </div>
+                                          </label>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="content-block">
-                                    <p>This is tab 1 content</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum mi quis felis scelerisque faucibus. Aliquam ut commodo justo. Mauris vitae pharetra arcu. Sed tincidunt dui et nibh auctor pretium. Nam
-                                        accumsan fermentum sem. Suspendisse potenti. Nulla sed orci malesuada, pellentesque elit vitae, cursus lorem. Praesent et vehicula sapien, ut rhoncus quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        In vitae mi nec lorem aliquet venenatis quis nec nibh. Aenean sit amet leo ligula. Fusce in massa et nisl dictum ultricies et vitae dui. Sed sagittis quis diam sed lobortis. Donec in massa pharetra, tristique purus
-                                        vitae, consequat mauris. Aliquam tellus ante, pharetra in mattis ut, dictum quis erat.</p>
-                                    <p>Ut ac lobortis lacus, non pellentesque arcu. Quisque sodales sapien malesuada, condimentum nunc at, viverra lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus
-                                        eu pulvinar turpis, id tristique quam. Aenean venenatis molestie diam, sit amet condimentum nisl pretium id. Donec diam tortor, mollis in vehicula id, vehicula consectetur nulla. Quisque posuere rutrum mauris, eu
-                                        rutrum turpis blandit at. Proin volutpat tortor sit amet metus porttitor accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut dapibus posuere dictum.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum mi quis felis scelerisque faucibus. Aliquam ut commodo justo. Mauris vitae pharetra arcu. Sed tincidunt dui et nibh auctor pretium. Nam
-                                        accumsan fermentum sem. Suspendisse potenti. Nulla sed orci malesuada, pellentesque elit vitae, cursus lorem. Praesent et vehicula sapien, ut rhoncus quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        In vitae mi nec lorem aliquet venenatis quis nec nibh. Aenean sit amet leo ligula. Fusce in massa et nisl dictum ultricies et vitae dui. Sed sagittis quis diam sed lobortis. Donec in massa pharetra, tristique purus
-                                        vitae, consequat mauris. Aliquam tellus ante, pharetra in mattis ut, dictum quis erat.</p>
+
                                 </div>
                             </div>
-                            <div id="tab-2" class="tab">
+                            <div id="tab-2" class="tab tabConteudo">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <label class="label-radio item-content">
+                                          <input type="radio" name="radioOption" class="radioOption" value="rgb">
+                                          <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                          <div class="item-inner">
+                                            <div class="item-title">Ativar controle RGB</div>
+                                          </div>
+                                        </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="list-block inputs-list">
+                                    <ul>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media color-red" id="valueRed"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Red</div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <input type="range" min="0" max="255" value="15" step="1" class="inputRgb" id="inputRed">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media color-green" id="valueGreen"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Green</div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <input type="range" min="0" max="255" value="233" step="1" class="inputRgb" id="inputGreen">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media color-blue" id="valueBlue"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Blue</div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <input type="range" min="0" max="255" value="255" step="1" class="inputRgb" id="inputBlue">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="content-block">
-                                    <p>This is tab 2 content</p>
-                                    <p>Ut ac lobortis lacus, non pellentesque arcu. Quisque sodales sapien malesuada, condimentum nunc at, viverra lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus
-                                        eu pulvinar turpis, id tristique quam. Aenean venenatis molestie diam, sit amet condimentum nisl pretium id. Donec diam tortor, mollis in vehicula id, vehicula consectetur nulla. Quisque posuere rutrum mauris, eu
-                                        rutrum turpis blandit at. Proin volutpat tortor sit amet metus porttitor accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut dapibus posuere dictum.</p>
-                                    <p>Fusce luctus turpis nunc, id porta orci blandit eget. Aenean sodales quam nec diam varius, in ornare ipsum condimentum. Aenean eleifend, nulla sit amet volutpat adipiscing, ligula nulla pharetra risus, vitae consequat
-                                        leo tortor eu nunc. Vivamus at fringilla metus. Duis neque lectus, sagittis in volutpat a, pretium vel turpis. Nam accumsan auctor libero, quis sodales felis faucibus quis. Etiam vestibulum sed nisl vel aliquet.
-                                        Aliquam pellentesque leo a lacus ultricies scelerisque. Vestibulum vestibulum fermentum tincidunt. Proin eleifend metus non quam pretium, eu vehicula ipsum egestas. Nam eget nibh enim. Etiam sem leo, pellentesque
-                                        a elit vel, egestas rhoncus enim. Morbi ultricies adipiscing tortor, vitae condimentum lacus hendrerit nec. Phasellus laoreet leo quis purus elementum, ut fringilla justo eleifend. Nunc ultricies a sapien vitae
-                                        auctor. Aliquam id erat elementum, laoreet est et, dapibus ligula.</p>
-                                    <p>Ut ac lobortis lacus, non pellentesque arcu. Quisque sodales sapien malesuada, condimentum nunc at, viverra lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus
-                                        eu pulvinar turpis, id tristique quam. Aenean venenatis molestie diam, sit amet condimentum nisl pretium id. Donec diam tortor, mollis in vehicula id, vehicula consectetur nulla. Quisque posuere rutrum mauris, eu
-                                        rutrum turpis blandit at. Proin volutpat tortor sit amet metus porttitor accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut dapibus posuere dictum.</p>
+                                    <div class="card">
+                                        <div class="card-content" id="previewCor">
+                                            <div class="card-content-inner text-center"><img src="img/lampada.png" alt="" /></div>
+
+                                        </div>
+                                        <div class="card-footer text-uppercase">
+                                            <div class="col-50" id="corHex"></div>
+                                            <div class="col-50" id="corRgb"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div id="tab-3" class="tab">
+                            <div id="tab-3" class="tab tabConteudo">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <label class="label-radio item-content">
+                                          <input type="radio" name="radioOption" class="radioOption" value="temperatura">
+                                          <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                          <div class="item-inner">
+                                            <div class="item-title">Ativar controle por Temperatura</div>
+                                          </div>
+                                        </label>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="content-block">
-                                    <p>This is tab 3 content</p>
-                                    <p>Nulla gravida libero eget lobortis iaculis. In sed elit eu nibh adipiscing faucibus. Sed ac accumsan lacus. In ut diam quis turpis fringilla volutpat. In ultrices dignissim consequat. Cras pretium tortor et lorem condimentum
-                                        posuere. Nulla facilisi. Suspendisse pretium egestas lacus ac laoreet. Mauris rhoncus quis ipsum quis tristique. Vivamus ultricies urna quis nunc egestas, in euismod turpis fringilla. Nam tellus massa, vehicula
-                                        eu sapien non, dapibus tempor lorem. Fusce placerat orci arcu, eu dignissim enim porttitor vel. Nullam porttitor vel dolor sed feugiat. Suspendisse potenti. Maecenas ac mattis odio. Sed vel ultricies lacus, sed
-                                        posuere libero.</p>
-                                    <p>Nulla gravida libero eget lobortis iaculis. In sed elit eu nibh adipiscing faucibus. Sed ac accumsan lacus. In ut diam quis turpis fringilla volutpat. In ultrices dignissim consequat. Cras pretium tortor et lorem condimentum
-                                        posuere. Nulla facilisi. Suspendisse pretium egestas lacus ac laoreet. Mauris rhoncus quis ipsum quis tristique. Vivamus ultricies urna quis nunc egestas, in euismod turpis fringilla. Nam tellus massa, vehicula
-                                        eu sapien non, dapibus tempor lorem. Fusce placerat orci arcu, eu dignissim enim porttitor vel. Nullam porttitor vel dolor sed feugiat. Suspendisse potenti. Maecenas ac mattis odio. Sed vel ultricies lacus, sed
-                                        posuere libero.</p>
-                                    <p>Nulla gravida libero eget lobortis iaculis. In sed elit eu nibh adipiscing faucibus. Sed ac accumsan lacus. In ut diam quis turpis fringilla volutpat. In ultrices dignissim consequat. Cras pretium tortor et lorem condimentum
-                                        posuere. Nulla facilisi. Suspendisse pretium egestas lacus ac laoreet. Mauris rhoncus quis ipsum quis tristique. Vivamus ultricies urna quis nunc egestas, in euismod turpis fringilla. Nam tellus massa, vehicula
-                                        eu sapien non, dapibus tempor lorem. Fusce placerat orci arcu, eu dignissim enim porttitor vel. Nullam porttitor vel dolor sed feugiat. Suspendisse potenti. Maecenas ac mattis odio. Sed vel ultricies lacus, sed
-                                        posuere libero.</p>
+                                    <div class="row text-center color-gray">
+                                        <div class="col-20">
+                                            <img src="img/temperatura.png" alt="" />
+                                        </div>
+                                        <div class="col-30">
+                                            <h1 id="dhtTemperatura"></h1>
+                                        </div>
+                                        <div class="col-20">
+                                            <img src="img/umidade.png" alt="" />
+                                        </div>
+                                        <div class="col-30">
+                                            <h1 id="dhtUmidade"></h1>
+                                        </div>
+                                    </div>
+                                    <div class="content-block-title text-center text-uppercase">Legenda de Cores</div>
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-9">
+                                                <p>Temperatura maior que 35°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-8">
+                                                <p>Temperatura entre 30°C e 35°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-7">
+                                                <p>Temperatura entre 25°C e 30°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-gray">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-6">
+                                                <p>Temperatura entre 20°C e 25°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-gray">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-5">
+                                                <p>Temperatura entre 15°C e 20°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-4">
+                                                <p>Temperatura entre 10°C e 15°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-gray">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-3">
+                                                <p>Temperatura entre 5°C e 10°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-2">
+                                                <p>Temperatura entre 0°C e 5°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-1">
+                                                <p>Temperatura entre -5°C e 0°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center color-white">
+                                        <div class="card-content">
+                                            <div class="card-content-inner" id="escala-0">
+                                                <p>Temperatura menor que -5°C</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -180,8 +325,12 @@
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <!-- Configurações do F7 -->
     <script type="text/javascript" src="js/my-app.js"></script>
-
     <script type="text/javascript" src="js/my-script.js"></script>
+
+    <script>
+        app.initialize();
+    </script>
+
 </body>
 
 </html>

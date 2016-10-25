@@ -15,3 +15,7 @@ var myApp = new Framework7({
         myApp.hideIndicator();
     }
 });
+
+myApp.onPageInit('inde', function(page) {
+  app.initialize();
+});

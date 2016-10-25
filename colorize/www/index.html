@@ -63,11 +63,11 @@
                     </div>
                     <div class="toolbar tabbar tabbar-labels">
                         <div class="toolbar-inner">
-                            <a href="#tab-1" class="tab-link tabMenu active" id="tabHumor">
+                            <a href="#tab-1" class="tab-link tabMenu" id="tabHumor">
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
                                 <span class="tabbar-label">Humor</span>
                             </a>
-                            <a href="#tab-2" class="tab-link tabMenu" id="tabRgb">
+                            <a href="#tab-2" class="tab-link tabMenu active" id="tabRgb">
                                 <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i>
                                 <span class="tabbar-label">RGB</span>
                             </a>
@@ -84,55 +84,110 @@
                     <!-- Scrollable page content hide-navbar-on-scroll-->
                     <div class="page-content">
                         <div class="tabs">
-                            <div id="tab-1" class="tab tabConteudo active">
+                            <div id="tab-1" class="tab tabConteudo">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <label class="label-radio item-content">
+                                            <input type="radio" name="radioOption" class="radioOption" value="humor" checked="checked">
+                                            <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                            <div class="item-inner">
+                                              <div class="item-title">Ativar controle por Humor</div>
+                                            </div>
+                                          </label>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="content-block">
-                                    <div class="list-block">
-                                        <ul>
-                                            <li>
-                                                <label class="label-radio item-content">
-                                                  <input type="radio" name="radioOption" class="radioOption" value="humor" checked="checked">
-                                                  <div class="item-media"><i class="icon icon-form-radio"></i></div>
-                                                  <div class="item-inner">
-                                                    <div class="item-title">Ativar controle por Humor</div>
-                                                  </div>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
                             </div>
-                            <div id="tab-2" class="tab tabConteudo">
-                                <div class="content-block">
-                                    <div class="list-block">
-                                        <ul>
-                                            <li>
-                                                <label class="label-radio item-content">
-                                                <input type="radio" name="radioOption" class="radioOption" value="rgb">
-                                                <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                            <div id="tab-2" class="tab tabConteudo active">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <label class="label-radio item-content">
+                                          <input type="radio" name="radioOption" class="radioOption" value="rgb">
+                                          <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                          <div class="item-inner">
+                                            <div class="item-title">Ativar controle RGB</div>
+                                          </div>
+                                        </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="list-block inputs-list">
+                                    <ul>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media color-red" id="valueRed"></div>
                                                 <div class="item-inner">
-                                                  <div class="item-title">Ativar controle RGB</div>
+                                                    <div class="item-title label">Red</div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <input type="range" min="0" max="255" value="15" step="1" class="inputRgb" id="inputRed">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                              </label>
-                                            </li>
-                                        </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media color-green" id="valueGreen"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Green</div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <input type="range" min="0" max="255" value="233" step="1" class="inputRgb" id="inputGreen">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media color-blue" id="valueBlue"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Blue</div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <input type="range" min="0" max="255" value="255" step="1" class="inputRgb" id="inputBlue">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="content-block">
+                                    <div class="card">
+                                        <div class="card-content" id="previewCor">
+                                            <div class="card-content-inner text-center"><img src="img/lampada.png" alt="" /></div>
+
+                                        </div>
+                                        <div class="card-footer text-uppercase">
+                                            <div class="col-50" id="corHex"></div>
+                                            <div class="col-50" id="corRgb"></div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                             <div id="tab-3" class="tab tabConteudo">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <label class="label-radio item-content">
+                                          <input type="radio" name="radioOption" class="radioOption" value="temperatura">
+                                          <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                          <div class="item-inner">
+                                            <div class="item-title">Ativar controle por Temperatura</div>
+                                          </div>
+                                        </label>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="content-block">
-                                    <div class="list-block">
-                                        <ul>
-                                            <li>
-                                                <label class="label-radio item-content">
-                                                <input type="radio" name="radioOption" class="radioOption" value="temperatura">
-                                                <div class="item-media"><i class="icon icon-form-radio"></i></div>
-                                                <div class="item-inner">
-                                                  <div class="item-title">Ativar controle por Temperatura</div>
-                                                </div>
-                                              </label>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     <div class="row text-center color-gray">
                                         <div class="col-20">
                                             <img src="img/temperatura.png" alt="" />

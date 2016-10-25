@@ -40,6 +40,7 @@ $('#tabDht').click(function() {
 
 });
 
+
 var storage = window.localStorage;
 storage.temperatura = 21;
 storage.umidade = 67;
@@ -53,6 +54,10 @@ var app = {
         this.rgb = {
             tabAtivo: false,
             operando: false,
+            hex: 0,
+            red: 0,
+            green: 0,
+            blue: 0
         };
         this.dht = {
             tabAtivo: false,
@@ -124,3 +129,31 @@ var app = {
         console.log(app);
     }
 };
+
+
+function componentToHex(c) {
+    var hexa = c.toString(16);
+    return hexa.length == 1 ? "0" + hexa : hexa;
+}
+
+function rgbToHex(r, g, b) {
+    return componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+//alert( rgbToHex(102, 2, 232) );
+
+window.setInterval('valoresSlider()', 50);
+function valoresSlider() {
+    app.rgb.red = parseInt($('#inputRed').val());
+    app.rgb.green = parseInt($('#inputGreen').val());
+    app.rgb.blue = parseInt($('#inputBlue').val());
+    $('#valueRed').html(app.rgb.red);
+    $('#valueGreen').html(app.rgb.green);
+    $('#valueBlue').html(app.rgb.blue);
+
+    app.rgb.hex = rgbToHex(app.rgb.red, app.rgb.green, app.rgb.blue)
+
+    $('#previewCor').css("background-color", "#" + app.rgb.hex);
+
+    $('#corHex').html("#" + app.rgb.hex);
+    $('#corRgb').html("rgb(" + app.rgb.red + ", " +  + app.rgb.green + ", " + app.rgb.blue + ")");
+}
