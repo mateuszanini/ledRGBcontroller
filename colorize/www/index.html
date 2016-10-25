@@ -63,15 +63,15 @@
                     </div>
                     <div class="toolbar tabbar tabbar-labels">
                         <div class="toolbar-inner">
-                            <a href="#tab-1" class="tab-link active">
+                            <a href="#tab-1" class="tab-link active" id="tabHumor">
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
-                                <span class="tabbar-label">Sensação</span>
+                                <span class="tabbar-label">Humor</span>
                             </a>
-                            <a href="#tab-2" class="tab-link">
+                            <a href="#tab-2" class="tab-link" id="tabRgb">
                                 <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i>
                                 <span class="tabbar-label">RGB</span>
                             </a>
-                            <a href="#tab-3" class="tab-link">
+                            <a href="#tab-3" class="tab-link" id="tabDht">
                                 <i class="fa fa-fire fa-2x" aria-hidden="true"></i>
                                 <span class="tabbar-label">Temperatura</span>
                             </a>
@@ -118,19 +118,41 @@
                             </div>
                             <div id="tab-3" class="tab">
                                 <div class="content-block">
-                                    <p>This is tab 3 content</p>
-                                    <p>Nulla gravida libero eget lobortis iaculis. In sed elit eu nibh adipiscing faucibus. Sed ac accumsan lacus. In ut diam quis turpis fringilla volutpat. In ultrices dignissim consequat. Cras pretium tortor et lorem condimentum
-                                        posuere. Nulla facilisi. Suspendisse pretium egestas lacus ac laoreet. Mauris rhoncus quis ipsum quis tristique. Vivamus ultricies urna quis nunc egestas, in euismod turpis fringilla. Nam tellus massa, vehicula
-                                        eu sapien non, dapibus tempor lorem. Fusce placerat orci arcu, eu dignissim enim porttitor vel. Nullam porttitor vel dolor sed feugiat. Suspendisse potenti. Maecenas ac mattis odio. Sed vel ultricies lacus, sed
-                                        posuere libero.</p>
-                                    <p>Nulla gravida libero eget lobortis iaculis. In sed elit eu nibh adipiscing faucibus. Sed ac accumsan lacus. In ut diam quis turpis fringilla volutpat. In ultrices dignissim consequat. Cras pretium tortor et lorem condimentum
-                                        posuere. Nulla facilisi. Suspendisse pretium egestas lacus ac laoreet. Mauris rhoncus quis ipsum quis tristique. Vivamus ultricies urna quis nunc egestas, in euismod turpis fringilla. Nam tellus massa, vehicula
-                                        eu sapien non, dapibus tempor lorem. Fusce placerat orci arcu, eu dignissim enim porttitor vel. Nullam porttitor vel dolor sed feugiat. Suspendisse potenti. Maecenas ac mattis odio. Sed vel ultricies lacus, sed
-                                        posuere libero.</p>
-                                    <p>Nulla gravida libero eget lobortis iaculis. In sed elit eu nibh adipiscing faucibus. Sed ac accumsan lacus. In ut diam quis turpis fringilla volutpat. In ultrices dignissim consequat. Cras pretium tortor et lorem condimentum
-                                        posuere. Nulla facilisi. Suspendisse pretium egestas lacus ac laoreet. Mauris rhoncus quis ipsum quis tristique. Vivamus ultricies urna quis nunc egestas, in euismod turpis fringilla. Nam tellus massa, vehicula
-                                        eu sapien non, dapibus tempor lorem. Fusce placerat orci arcu, eu dignissim enim porttitor vel. Nullam porttitor vel dolor sed feugiat. Suspendisse potenti. Maecenas ac mattis odio. Sed vel ultricies lacus, sed
-                                        posuere libero.</p>
+                                    <div class="row text-center color-gray">
+                                        <div class="col-20">
+                                            <img src="img/temperatura.png" alt="" />
+                                        </div>
+                                        <div class="col-30">
+                                            <h1 id="dhtTemperatura"></h1>
+                                        </div>
+                                        <div class="col-20">
+                                            <img src="img/umidade.png" alt="" />
+                                        </div>
+                                        <div class="col-30">
+                                            <h1 id="dhtUmidade"></h1>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">Ativar controle por temperatura</div>
+                                            <div class="item-input">
+                                                <label class="label-switch">
+                                  <input type="checkbox">
+                                  <div class="checkbox"></div>
+                                  </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                      <div class="card text-center color-white">
+                                          <div class="card-content">
+                                              <div class="card-content-inner" style="background-color: #6602E8"><p>Temperatura menor que -5 °C</p></div>
+                                          </div>
+                                      </div>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -180,8 +202,12 @@
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <!-- Configurações do F7 -->
     <script type="text/javascript" src="js/my-app.js"></script>
-
     <script type="text/javascript" src="js/my-script.js"></script>
+
+    <script>
+        app.initialize();
+    </script>
+
 </body>
 
 </html>

@@ -15,9 +15,3 @@ var myApp = new Framework7({
         myApp.hideIndicator();
     }
 });
-
-$('.password-modal').on('click', function () {
-    myApp.modalPassword('You password please:', function (password) {
-        myApp.alert('Thank you! Your password is: ' + password);
-    });
-}); 
