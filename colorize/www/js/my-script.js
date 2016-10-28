@@ -1,136 +1,195 @@
+var app = {
+    initialize: function() {
+        //está conectado ao WebSocket?
+        this.conectado = false;
+        //ip default para conexão com o WebSocket
+        this.ip = "192.168.4.1";
+        //porta default para conexão com o WebSocket
+        this.porta = "81";
+
+        $('#ipConexao').val(app.ip);
+
+        //variáveis para armazenar os valores de R, G e B
+        this.red = 15;
+        this.green = 233;
+        this.blue = 255;
+        //variável para armazenar a cor em Hexadecimal;
+        this.hexa = "0FE9FF";
+
+        //variáveis para armazenar umidade e temperatura
+        this.temperatura = 23.91;
+        this.umidade = 68.49;
+
+        $('#dhtTemperatura').html(app.temperatura + ' °C');
+        $('#dhtUmidade').html(app.umidade + ' %');
+
+        //JSon com as cores para montar a escala de temperatura
+        this.cores = [{
+            hexa: "6602E8",
+            red: 102,
+            green: 2,
+            blue: 232
+        }, {
+            hexa: "008AFF",
+            red: 0,
+            green: 138,
+            blue: 255
+        }, {
+            hexa: "12E9FF",
+            red: 15,
+            green: 233,
+            blue: 255
+        }, {
+            hexa: "06FF8A",
+            red: 6,
+            green: 255,
+            blue: 138
+        }, {
+            hexa: "00E808",
+            red: 0,
+            green: 232,
+            blue: 0
+        }, {
+            hexa: "C0FF00",
+            red: 192,
+            green: 255,
+            blue: 0
+        }, {
+            hexa: "FFF800",
+            red: 255,
+            green: 248,
+            blue: 0
+        }, {
+            hexa: "FF9200",
+            red: 255,
+            green: 146,
+            blue: 0
+        }, {
+            hexa: "E84200",
+            red: 232,
+            green: 66,
+            blue: 255
+        }, {
+            hexa: "FF0000",
+            red: 255,
+            green: 0,
+            blue: 0
+        }];
+
+        for (var i = 0; i < 10; i++) {
+            var cor = app.cores[i].hexa;
+            $('#escala-' + i).css("background-color", "#" + cor);
+        }
+    },
+
+    connect: function() {
+        //var ws = new WebSocket('ws://192.168.4.1:81');
+        this.ws = new WebSocket('ws://' + app.ip + ':' + app.porta);
+
+        this.ws.onopen = function(e) {
+            app.conectado = true;
+            myApp.hidePreloader();
+            myApp.alert('Connected');
+            console.log('Connected');
+        };
+
+        this.ws.onclose = function(e) {
+            app.conectado = false;
+            myApp.hidePreloader();
+            myApp.alert('Disconnected');
+            console.log('Disconnected');
+        };
+
+        this.ws.onerror = function(e) {
+            app.conectado = false;
+            myApp.hidePreloader();
+            myApp.alert('Error');
+            console.log('Error');
+        };
+
+        this.ws.onmessage = function(e) {
+            trataDadosRecebidos(e);
+        };
+    },
+
+    waitForSocketConnection: function(callback) {
+        setTimeout(
+            function() {
+                if (app.ws.readyState === 1) {
+                    if (callback !== undefined) {
+                        callback();
+                    }
+                    return;
+                } else {
+                    waitForSocketConnection(callback);
+                }
+            }, 5);
+    },
+
+    send: function(msg) {
+        app.waitForSocketConnection(function() {
+            msg += '\n';
+            app.ws.send(msg);
+            console.log('Message sent: ' + msg);
+        });
+    },
+
+    trataDadosRecebidos: function(e) {
+        try {
+            console.log(e);
+            dados = JSON.parse(e.data.substring(0, e.data.length - 1));
+            console.log()
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+    }
+}
+
+app.initialize();
+
+//ip default
 $('#btnIpDefault').click(function() {
     $('#ipConexao').focus();
-    $('#ipConexao').val('192.168.0.101');
+    $('#ipConexao').val(app.ip);
     $('#ipConexao').blur();
 });
 
+//salva o ip e conecta no WebSocket
 $('#btnSalvarIp').click(function() {
-    var ip = $('#ipConexao').val();
-    myApp.showPreloader('Conectando a ' + ip);
-    setTimeout(function() {
+    app.ip = $('#ipConexao').val();
+    myApp.showPreloader('Tentando conectar-se a ' + app.ip);
+    myApp.closeModal('.picker-config');
+    app.connect();
+    /*setTimeout(function() {
         myApp.hidePreloader();
         myApp.closeModal('.picker-config');
-    }, 2000);
+    }, 2000);*/
 });
 
-$('#tabHumor').click(function() {
-    app.humor.tabAtivo = true;
-    app.rgb.tabAtivo = false;
-    app.dht.tabAtivo = false;
-});
 
-$('#tabRgb').click(function() {
-    app.humor.tabAtivo = false;
-    app.rgb.tabAtivo = true;
-    app.dht.tabAtivo = false;
-});
-
-$('#tabDht').click(function() {
-    app.humor.tabAtivo = false;
-    app.rgb.tabAtivo = false;
-    app.dht.tabAtivo = true;
-
-    $('#dhtTemperatura').html(app.dht.temperatura + ' °C');
-    $('#dhtUmidade').html(app.dht.umidade + ' %');
-
-    for (var i = 0; i < 10; i++) {
-        var cor = app.dht.cores[i].hexa;
-        $('#escala-' + i).css("background-color", "#" + cor);
+$('#btnRgb').click(function() {
+    if (app.conectado) {
+        myApp.alert("1 " + app.red + " " + app.green + " " + app.blue);
+        app.send("1 " + app.red + " " + app.green + " " + app.blue);
+    } else {
+        myApp.alert("Não conectado a " + app.ip);
+        myApp.pickerModal('.picker-config');
     }
 
 });
 
-
-var storage = window.localStorage;
-storage.temperatura = 21;
-storage.umidade = 67;
-
-var app = {
-    initialize: function() {
-        this.humor = {
-            tabAtivo: false,
-            operando: false,
-        };
-        this.rgb = {
-            tabAtivo: false,
-            operando: false,
-            hex: 0,
-            red: 0,
-            green: 0,
-            blue: 0
-        };
-        this.dht = {
-            tabAtivo: false,
-            operando: false,
-            temperatura: storage.temperatura,
-            umidade: storage.umidade,
-            cores: [{
-                escala: 0,
-                hexa: "6602E8",
-                red: 102,
-                green: 2,
-                blue: 232
-            }, {
-                escala: 1,
-                hexa: "008AFF",
-                red: 0,
-                green: 138,
-                blue: 255
-            }, {
-                escala: 2,
-                hexa: "12E9FF",
-                red: 15,
-                green: 233,
-                blue: 255
-            }, {
-                escala: 3,
-                hexa: "06FF8A",
-                red: 6,
-                green: 255,
-                blue: 138
-            }, {
-                escala: 4,
-                hexa: "00E808",
-                red: 0,
-                green: 232,
-                blue: 0
-            }, {
-                escala: 5,
-                hexa: "C0FF00",
-                red: 192,
-                green: 255,
-                blue: 0
-            }, {
-                escala: 6,
-                hexa: "FFF800",
-                red: 255,
-                green: 248,
-                blue: 0
-            }, {
-                escala: 7,
-                hexa: "FF9200",
-                red: 255,
-                green: 146,
-                blue: 0
-            }, {
-                escala: 8,
-                hexa: "E84200",
-                red: 232,
-                green: 66,
-                blue: 255
-            }, {
-                escala: 9,
-                hexa: "FF0000",
-                red: 255,
-                green: 0,
-                blue: 0
-            }]
-        };
-        console.log(app);
+$('#btnTemperatura').click(function() {
+    if (app.conectado) {
+        myApp.alert("0 0 0 0");
+        app.send("0 0 0 0");
+    } else {
+        myApp.alert("Não conectado a " + app.ip);
+        myApp.pickerModal('.picker-config');
     }
-};
+});
 
-
+//conversão para hexadecimal
 function componentToHex(c) {
     var hexa = c.toString(16);
     return hexa.length == 1 ? "0" + hexa : hexa;
@@ -140,19 +199,29 @@ function rgbToHex(r, g, b) {
     return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-window.setInterval('valoresSlider()', 50);
+//pega os valores dos sliders, para R, G e B
 function valoresSlider() {
-    storage.red = app.rgb.red = parseInt($('#inputRed').val());
-    storage.green = app.rgb.green = parseInt($('#inputGreen').val());
-    storage.blue = app.rgb.blue = parseInt($('#inputBlue').val());
-    $('#valueRed').html(app.rgb.red);
-    $('#valueGreen').html(app.rgb.green);
-    $('#valueBlue').html(app.rgb.blue);
+    app.red = parseInt($('#inputRed').val());
+    app.green = parseInt($('#inputGreen').val());
+    app.blue = parseInt($('#inputBlue').val());
+}
 
-    storage.hex = app.rgb.hex = rgbToHex(app.rgb.red, app.rgb.green, app.rgb.blue)
+//executa uma função em um determinado intervalo de tempo
+window.setInterval('atualizaSlider()', 50);
 
-    $('#previewCor').css("background-color", "#" + app.rgb.hex);
+//atualiza os valores de R, G e B em tela e altera o card de preview
+function atualizaSlider() {
 
-    $('#corHex').html("#" + app.rgb.hex);
-    $('#corRgb').html("rgb(" + app.rgb.red + ", " +  + app.rgb.green + ", " + app.rgb.blue + ")");
+    valoresSlider();
+
+    $('#valueRed').html(app.red);
+    $('#valueGreen').html(app.green);
+    $('#valueBlue').html(app.blue);
+
+    app.hexa = rgbToHex(app.red, app.green, app.blue)
+
+    $('#previewCor').css("background-color", "#" + app.hexa);
+
+    $('#corHex').html("#" + app.hexa);
+    $('#corRgb').html("rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
 }

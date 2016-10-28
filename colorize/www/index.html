@@ -85,7 +85,7 @@
                     <div class="page-content">
                         <div class="tabs">
                             <div id="tab-1" class="tab tabConteudo">
-                                <div class="list-block">
+                                <!--<div class="list-block">
                                     <ul>
                                         <li>
                                             <label class="label-radio item-content">
@@ -97,13 +97,14 @@
                                           </label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div>-->
                                 <div class="content-block">
 
                                 </div>
                             </div>
+
                             <div id="tab-2" class="tab tabConteudo active">
-                                <div class="list-block">
+                                <!--<div class="list-block">
                                     <ul>
                                         <li>
                                             <label class="label-radio item-content">
@@ -115,6 +116,21 @@
                                         </label>
                                         </li>
                                     </ul>
+                                </div>-->
+                                <div class="content-block">
+                                    <div class="card">
+                                        <div class="card-content" id="previewCor">
+                                            <div class="card-content-inner text-center">
+                                                <!--<img src="img/lampada.png" alt="" />-->
+                                                <a href="#" class="button button-big color-white ripple-white" id="btnRgb">Aplicar esta cor</a>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-footer text-uppercase">
+                                            <div class="col-50" id="corHex"></div>
+                                            <div class="col-50" id="corRgb"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="list-block inputs-list">
                                     <ul>
@@ -159,25 +175,11 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="content-block">
-                                    <div class="card">
-                                        <div class="card-content" id="previewCor">
-                                            <div class="card-content-inner text-center">
-                                              <!--<img src="img/lampada.png" alt="" />-->
-                                              <a href="#" class="button button-big color-white ripple-white">Aplicar esta cor</a>
-                                            </div>
 
-                                        </div>
-                                        <div class="card-footer text-uppercase">
-                                            <div class="col-50" id="corHex"></div>
-                                            <div class="col-50" id="corRgb"></div>
-                                        </div>
-                                    </div>
-
-                                </div>
                             </div>
+
                             <div id="tab-3" class="tab tabConteudo">
-                                <div class="list-block">
+                                <!--<div class="list-block">
                                     <ul>
                                         <li>
                                             <label class="label-radio item-content">
@@ -189,22 +191,23 @@
                                         </label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div>-->
                                 <div class="content-block">
                                     <div class="row text-center color-gray">
-                                        <div class="col-20">
-                                            <img src="img/temperatura.png" alt="" />
+                                        <div class="col-50">
+                                            <div class="col-100"><img src="img/temperatura.png" alt="" /></div>
+                                            <div class="col-100">
+                                                <h1 id="dhtTemperatura"></h1></div>
                                         </div>
-                                        <div class="col-30">
-                                            <h1 id="dhtTemperatura"></h1>
-                                        </div>
-                                        <div class="col-20">
-                                            <img src="img/umidade.png" alt="" />
-                                        </div>
-                                        <div class="col-30">
-                                            <h1 id="dhtUmidade"></h1>
+                                        <div class="col-50">
+                                            <div class="col-100"><img src="img/umidade.png" alt="" /></div>
+                                            <div class="col-100">
+                                                <h1 id="dhtUmidade"></h1></div>
                                         </div>
                                     </div>
+
+                                    <a href="#" class="button button-raised button-fill color-orange" id="btnTemperatura">Controle por temperatura</a>
+
                                     <div class="content-block-title text-center text-uppercase">Legenda de Cores</div>
                                     <div class="card text-center color-white">
                                         <div class="card-content">
@@ -293,10 +296,10 @@
         <div class="toolbar">
             <div class="toolbar-inner">
                 <div class="left">
-                    <a href="#" class="button color-white ripple-orange close-picker"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</a>
+                    <a href="#" class="button color-white ripple-white close-picker"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</a>
                 </div>
                 <div class="right">
-                    <a href="#" class="button color-white ripple-orange" id="btnSalvarIp"><i class="fa fa-check" aria-hidden="true"></i> Salvar</a>
+                    <a href="#" class="button color-white ripple-white" id="btnSalvarIp"><i class="fa fa-check" aria-hidden="true"></i> Salvar</a>
                 </div>
             </div>
         </div>
@@ -307,9 +310,9 @@
                     <div class="item-content">
                         <div class="item-media color-orange"><i class="fa fa-plug fa-2x" aria-hidden="true"></i></div>
                         <div class="item-inner">
-                            <div class="item-title floating-label">Ip para conexão</div>
+                            <div class="item-title label">Ip para conexão</div>
                             <div class="item-input item-input-field">
-                                <input type="text" name="ipConexao" id="ipConexao" placeholder="" class="">
+                                <input type="text" name="ipConexao" id="ipConexao" placeholder="Ip" class="">
                             </div>
                         </div>
                     </div>
