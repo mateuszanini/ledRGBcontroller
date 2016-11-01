@@ -16,9 +16,12 @@ var app = {
         //variável para armazenar a cor em Hexadecimal;
         this.hexa = "0FE9FF";
 
+        //pega os valores dos sliders e aplica o bg no card
+        atualizaSlider();
+
         //variáveis para armazenar umidade e temperatura
-        this.temperatura = 23.91;
-        this.umidade = 68.49;
+        this.temperatura = 0.00;
+        this.umidade = 0.00;
 
         $('#dhtTemperatura').html(app.temperatura + ' °C');
         $('#dhtUmidade').html(app.umidade + ' %');
@@ -108,7 +111,7 @@ var app = {
         };
 
         this.ws.onmessage = function(e) {
-            trataDadosRecebidos(e);
+            app.trataDadosRecebidos(e);
         };
     },
 
@@ -138,7 +141,11 @@ var app = {
         try {
             console.log(e);
             dados = JSON.parse(e.data.substring(0, e.data.length - 1));
-            console.log()
+            console.log(dados);
+			app.temperatura = dados.t;
+			app.umidade = dados.u;
+			$('#dhtTemperatura').html(app.temperatura + ' °C');
+			$('#dhtUmidade').html(app.umidade + ' %');
         } catch (err) {
             console.log(err);
             return;
@@ -167,11 +174,21 @@ $('#btnSalvarIp').click(function() {
     }, 2000);*/
 });
 
+$('#btnFade').click(function() {
+    if (app.conectado) {
+        //myApp.alert("2 " + app.red + " " + app.green + " " + app.blue);
+        app.send("3 " + app.red + " " + app.green + " " + app.blue);
+    } else {
+        myApp.alert("Não conectado a " + app.ip);
+        myApp.pickerModal('.picker-config');
+    }
+
+});
 
 $('#btnRgb').click(function() {
     if (app.conectado) {
-        myApp.alert("1 " + app.red + " " + app.green + " " + app.blue);
-        app.send("1 " + app.red + " " + app.green + " " + app.blue);
+        //myApp.alert("2 " + app.red + " " + app.green + " " + app.blue);
+        app.send("2 " + app.red + " " + app.green + " " + app.blue);
     } else {
         myApp.alert("Não conectado a " + app.ip);
         myApp.pickerModal('.picker-config');
@@ -181,8 +198,8 @@ $('#btnRgb').click(function() {
 
 $('#btnTemperatura').click(function() {
     if (app.conectado) {
-        myApp.alert("0 0 0 0");
-        app.send("0 0 0 0");
+        //myApp.alert("1 0 0 0");
+        app.send("1 0 0 0");
     } else {
         myApp.alert("Não conectado a " + app.ip);
         myApp.pickerModal('.picker-config');
@@ -207,7 +224,10 @@ function valoresSlider() {
 }
 
 //executa uma função em um determinado intervalo de tempo
-window.setInterval('atualizaSlider()', 50);
+//window.setInterval('atualizaSlider()', 50);
+$("#inputRed, #inputGreen, #inputBlue").on("input change", function() {
+    atualizaSlider();
+});
 
 //atualiza os valores de R, G e B em tela e altera o card de preview
 function atualizaSlider() {

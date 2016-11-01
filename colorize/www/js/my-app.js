@@ -7,6 +7,8 @@ var myApp = new Framework7({
     material: true,
     materialPageLoadDelay: 5,
     materialRipple: true,
+    tapHold: true,
+    tapHoldDelay: 1000,
 
     onAjaxStart: function (xhr) {
         myApp.showIndicator();
@@ -18,4 +20,8 @@ var myApp = new Framework7({
 
 myApp.onPageInit('inde', function(page) {
   app.initialize();
+});
+
+$('#logo').on('taphold', function () {
+  myApp.popup('.popup-modos');
 });
