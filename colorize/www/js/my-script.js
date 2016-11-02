@@ -142,10 +142,10 @@ var app = {
             console.log(e);
             dados = JSON.parse(e.data.substring(0, e.data.length - 1));
             console.log(dados);
-			app.temperatura = dados.t;
-			app.umidade = dados.u;
-			$('#dhtTemperatura').html(app.temperatura + ' °C');
-			$('#dhtUmidade').html(app.umidade + ' %');
+            app.temperatura = dados.t;
+            app.umidade = dados.u;
+            $('#dhtTemperatura').html(app.temperatura + ' °C');
+            $('#dhtUmidade').html(app.umidade + ' %');
         } catch (err) {
             console.log(err);
             return;
@@ -244,4 +244,63 @@ function atualizaSlider() {
 
     $('#corHex').html("#" + app.hexa);
     $('#corRgb').html("rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
+}
+
+
+/*FADE*/
+var fadeRed = 255;
+var fadeGreen = 0;
+var fadeBlue = 0;
+var strobo = true;
+
+var fadeTime = 15;
+$("#inputDelay").on("input change", function() {
+    fadeTime = $("#inputDelay").val();
+    $('#delayShow').html(fadeTime + " ms");
+});
+
+function bgFadeStrobo() {
+    var fadeRgb = "rgb(" + fadeRed + "," + fadeGreen + "," + fadeBlue + ")";
+    $('#previewFade').css("background-color", fadeRgb);
+
+    if(strobo){
+      $('#previewStrobo').css("background-color", "rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
+      strobo = false;
+    }else{
+      $('#previewStrobo').css("background-color", "white");
+      strobo = true;
+    }
+
+    window.clearInterval(fadePreview);
+    fadePreview = window.setInterval('fadeStrobo()', fadeTime);
+}
+
+var fadePreview = window.setInterval('fadeStrobo()', fadeTime);
+
+function fadeStrobo() {
+    if (fadeBlue == 0) {
+        if (fadeGreen < 255) {
+            fadeGreen += 1;
+        }
+        if(fadeRed > 0){
+          fadeRed -= 1;
+        }
+    }
+    if (fadeRed == 0) {
+        if (fadeBlue < 255) {
+            fadeBlue += 1;
+        }
+        if(fadeGreen > 0){
+          fadeGreen -= 1;
+        }
+    }
+    if (fadeGreen == 0) {
+        if (fadeRed < 255) {
+            fadeRed += 1;
+        }
+        if(fadeBlue > 0){
+          fadeBlue -= 1;
+        }
+    }
+    bgFadeStrobo();
 }

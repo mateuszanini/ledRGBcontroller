@@ -8,7 +8,7 @@ var myApp = new Framework7({
     materialPageLoadDelay: 5,
     materialRipple: true,
     tapHold: true,
-    tapHoldDelay: 1000,
+    tapHoldDelay: 750,
 
     onAjaxStart: function (xhr) {
         myApp.showIndicator();

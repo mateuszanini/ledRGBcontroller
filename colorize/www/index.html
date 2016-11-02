@@ -340,9 +340,40 @@
     <!-- POPUP -->
     <div class="popup popup-modos">
         <div class="content-block">
-            <p>About</p>
-            <p><a href="#" class="close-popup">Close popup</a></p>
-            <p>Lorem ipsum dolor ...</p>
+            <p>
+                <a href="#" class="button close-popup">Fechar</a>
+            </p>
+            <div class="list-block inputs-list">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">Delay</div>
+                                <div class="item-input">
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="2000" value="50" step="1" id="inputDelay">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="color-orange text-center" id="delayShow">50 ms</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block-title color-orange text-uppercase">Modo Fade</div>
+            <div class="card">
+                <div class="card-content cardModos" id="previewFade">
+                    <div class="card-content-inner text-center"> </div>
+                </div>
+            </div>
+
+            <div class="content-block-title color-orange text-uppercase">Modo Strobo</div>
+            <div class="card">
+                <div class="card-content cardModos" id="previewStrobo">
+                    <div class="card-content-inner text-center"> </div>
+                </div>
+            </div>
         </div>
     </div>
 
