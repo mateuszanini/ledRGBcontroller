@@ -89,30 +89,42 @@
                     <div class="page-content">
                         <div class="tabs">
                             <div id="tab-1" class="tab tabConteudo">
-                                <!--<div class="list-block">
+                                <div class="list-block media-list">
                                     <ul>
                                         <li>
-                                            <label class="label-radio item-content">
-                                            <input type="radio" name="radioOption" class="radioOption" value="humor" checked="checked">
-                                            <div class="item-media"><i class="icon icon-form-radio"></i></div>
-                                            <div class="item-inner">
-                                              <div class="item-title">Ativar controle por Humor</div>
+                                            <div class="item-content">
+                                                <div class="item-media"><img src="img/triste.png"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Yellow Submarine</div>
+                                                    </div>
+                                                    <div class="item-subtitle">Beatles</div>
+                                                </div>
                                             </div>
-                                          </label>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-link item-content">
+                                                <div class="item-media"><img src="http://lorempixel.com/88/88/fashion/2" width="44"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Don't Stop Me Now</div>
+                                                    </div>
+                                                    <div class="item-subtitle">Queen</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><img src="http://lorempixel.com/88/88/fashion/3" width="44"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Billie Jean</div>
+                                                    </div>
+                                                    <div class="item-subtitle">Michael Jackson</div>
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
-                                </div>-->
-                                <div class="content-block">
-                                    <a href="#" class="button button-raised button-fill color-orange" id="btnFade">Modo Fade</a>
-
-                                    <hr>
-                                    <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A22zx6c7ev43u4mmh3lzxrzq6a%3Aplaylist%3A60lkuXNhN1gGUuucZ5Xexv" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-                                    <hr>
-                                    <iframe src="https://embed.spotify.com/?uri=spotify:track:5JunxkcjfCYcY7xJ29tLai" frameborder="0" allowtransparency="true"></iframe>
-                                    <iframe src="https://embed.spotify.com/?uri=spotify:user:erebore:playlist:788MOXyTfcUb1tdw4oC7KJ&view=coverart" frameborder="0" allowtransparency="true"></iframe>
-                                    <iframe src="https://embed.spotify.com/?uri=spotify:user:erebore:playlist:788MOXyTfcUb1tdw4oC7KJ&theme=white" frameborder="0" allowtransparency="true"></iframe>
-                                    <iframe src="https://embed.spotify.com/?uri=spotify:user:erebore:playlist:788MOXyTfcUb1tdw4oC7KJ&theme=white&view=coverart" frameborder="0" allowtransparency="true"></iframe>
-
                                 </div>
 
                             </div>
@@ -351,7 +363,7 @@
                                 <div class="item-title label">Delay</div>
                                 <div class="item-input">
                                     <div class="range-slider">
-                                        <input type="range" min="0" max="2000" value="50" step="1" id="inputDelay">
+                                        <input type="range" min="10" max="2000" value="50" step="1" id="inputDelay">
                                     </div>
                                 </div>
                             </div>
@@ -361,19 +373,26 @@
                 </ul>
             </div>
 
-            <div class="content-block-title color-orange text-uppercase">Modo Fade</div>
-            <div class="card">
-                <div class="card-content cardModos" id="previewFade">
-                    <div class="card-content-inner text-center"> </div>
-                </div>
-            </div>
-
             <div class="content-block-title color-orange text-uppercase">Modo Strobo</div>
             <div class="card">
                 <div class="card-content cardModos" id="previewStrobo">
                     <div class="card-content-inner text-center"> </div>
                 </div>
             </div>
+            <p>
+                <a href="#" class="button button-raised" id="btnStrobo">Ativar modo strobo</a>
+            </p>
+
+            <div class="content-block-title color-orange text-uppercase">Modo Fade</div>
+            <div class="card">
+                <div class="card-content cardModos" id="previewFade">
+                    <div class="card-content-inner text-center"> </div>
+                </div>
+            </div>
+            <p>
+                <a href="#" class="button button-raised" id="btnFade">Ativar modo fade</a>
+            </p>
+
         </div>
     </div>
 

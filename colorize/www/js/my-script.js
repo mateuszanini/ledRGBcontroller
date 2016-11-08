@@ -16,6 +16,9 @@ var app = {
         //variável para armazenar a cor em Hexadecimal;
         this.hexa = "0FE9FF";
 
+        this.timeFade = 20;
+        this.timeStrobo = 50;
+
         //pega os valores dos sliders e aplica o bg no card
         atualizaSlider();
 
@@ -133,7 +136,7 @@ var app = {
         app.waitForSocketConnection(function() {
             msg += '\n';
             app.ws.send(msg);
-            console.log('Message sent: ' + msg);
+            console.log('Comando enviado: ' + msg);
         });
     },
 
@@ -174,23 +177,31 @@ $('#btnSalvarIp').click(function() {
     }, 2000);*/
 });
 
+//MODOS
+
 $('#btnFade').click(function() {
     if (app.conectado) {
-        //myApp.alert("2 " + app.red + " " + app.green + " " + app.blue);
-        app.send("3 " + app.red + " " + app.green + " " + app.blue);
+        app.send("3 " + app.timeFade + " 0 0 0");
     } else {
-        myApp.alert("Não conectado a " + app.ip);
+        myApp.alert("Não conectado!");
         myApp.pickerModal('.picker-config');
     }
+});
 
+$('#btnStrobo').click(function() {
+    if (app.conectado) {
+        app.send("4 " + app.timeStrobo + " " + app.red + " " + app.green + " " + app.blue);
+    } else {
+        myApp.alert("Não conectado!");
+        myApp.pickerModal('.picker-config');
+    }
 });
 
 $('#btnRgb').click(function() {
     if (app.conectado) {
-        //myApp.alert("2 " + app.red + " " + app.green + " " + app.blue);
-        app.send("2 " + app.red + " " + app.green + " " + app.blue);
+        app.send("2 0 " + app.red + " " + app.green + " " + app.blue);
     } else {
-        myApp.alert("Não conectado a " + app.ip);
+        myApp.alert("Não conectado!");
         myApp.pickerModal('.picker-config');
     }
 
@@ -198,10 +209,9 @@ $('#btnRgb').click(function() {
 
 $('#btnTemperatura').click(function() {
     if (app.conectado) {
-        //myApp.alert("1 0 0 0");
-        app.send("1 0 0 0");
+        app.send("1 0 0 0 0");
     } else {
-        myApp.alert("Não conectado a " + app.ip);
+        myApp.alert("Não conectado!");
         myApp.pickerModal('.picker-config');
     }
 });
@@ -246,23 +256,16 @@ function atualizaSlider() {
     $('#corRgb').html("rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
 }
 
-
-/*FADE*/
-var fadeRed = 255;
-var fadeGreen = 0;
-var fadeBlue = 0;
-var strobo = true;
-
-var fadeTime = 15;
 $("#inputDelay").on("input change", function() {
-    fadeTime = $("#inputDelay").val();
-    $('#delayShow').html(fadeTime + " ms");
+    app.timeStrobo = $("#inputDelay").val();
+    $('#delayShow').html(app.timeStrobo + " ms");
 });
 
-function bgFadeStrobo() {
-    var fadeRgb = "rgb(" + fadeRed + "," + fadeGreen + "," + fadeBlue + ")";
-    $('#previewFade').css("background-color", fadeRgb);
+/*STROBO*/
+var strobo = true;
+var stroboPreview = window.setInterval('stroboShow()', app.timeStrobo);
 
+function stroboShow() {
     if(strobo){
       $('#previewStrobo').css("background-color", "rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
       strobo = false;
@@ -270,14 +273,19 @@ function bgFadeStrobo() {
       $('#previewStrobo').css("background-color", "white");
       strobo = true;
     }
-
-    window.clearInterval(fadePreview);
-    fadePreview = window.setInterval('fadeStrobo()', fadeTime);
+    window.clearInterval(stroboPreview);
+    stroboPreview = window.setInterval('stroboShow()',  app.timeStrobo);
 }
 
-var fadePreview = window.setInterval('fadeStrobo()', fadeTime);
 
-function fadeStrobo() {
+
+/*FADE*/
+var fadeRed = 255;
+var fadeGreen = 0;
+var fadeBlue = 0;
+
+var fadePreview = window.setInterval('fade()', app.timeFade);
+function fade() {
     if (fadeBlue == 0) {
         if (fadeGreen < 255) {
             fadeGreen += 1;
@@ -302,5 +310,6 @@ function fadeStrobo() {
           fadeBlue -= 1;
         }
     }
-    bgFadeStrobo();
+    var fadeRgb = "rgb(" + fadeRed + "," + fadeGreen + "," + fadeBlue + ")";
+    $('#previewFade').css("background-color", fadeRgb);
 }
