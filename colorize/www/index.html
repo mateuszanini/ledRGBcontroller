@@ -69,7 +69,7 @@
                         <div class="toolbar-inner">
                             <a href="#tab-1" class="tab-link tabMenu" id="tabHumor">
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
-                                <span class="tabbar-label">Humor</span>
+                                <span class="tabbar-label">Mais</span>
                             </a>
                             <a href="#tab-2" class="tab-link tabMenu active" id="tabRgb">
                                 <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i>
@@ -89,22 +89,11 @@
                     <div class="page-content">
                         <div class="tabs">
                             <div id="tab-1" class="tab tabConteudo">
-                                <div class="list-block media-list">
+                                <!--<div class="list-block media-list">
                                     <ul>
                                         <li>
-                                            <div class="item-content">
-                                                <div class="item-media"><img src="img/triste.png"></div>
-                                                <div class="item-inner">
-                                                    <div class="item-title-row">
-                                                        <div class="item-title">Yellow Submarine</div>
-                                                    </div>
-                                                    <div class="item-subtitle">Beatles</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
                                             <a href="#" class="item-link item-content">
-                                                <div class="item-media"><img src="http://lorempixel.com/88/88/fashion/2" width="44"></div>
+                                                <div class="item-media"><img src="img/triste.png" width="60"></div>
                                                 <div class="item-inner">
                                                     <div class="item-title-row">
                                                         <div class="item-title">Don't Stop Me Now</div>
@@ -113,18 +102,46 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-media"><img src="http://lorempixel.com/88/88/fashion/3" width="44"></div>
-                                                <div class="item-inner">
-                                                    <div class="item-title-row">
-                                                        <div class="item-title">Billie Jean</div>
-                                                    </div>
-                                                    <div class="item-subtitle">Michael Jackson</div>
-                                                </div>
-                                            </div>
-                                        </li>
                                     </ul>
+                                </div>-->
+                                <div class="content-block">
+                                    <div class="content-block-title color-orange text-uppercase">Modo Strobo</div>
+                                    <div class="list-block inputs-list">
+                                        <ul>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">Delay</div>
+                                                        <div class="item-input">
+                                                            <div class="range-slider">
+                                                                <input type="range" min="10" max="2000" value="50" step="1" id="inputDelay">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="color-orange text-center" id="delayShow">50 ms</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-content cardModos" id="previewStrobo">
+                                            <div class="card-content-inner text-center"> </div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <a href="#" class="button button-raised" id="btnStrobo">Ativar modo strobo</a>
+                                    </p>
+
+                                    <div class="content-block-title color-orange text-uppercase">Modo Fade</div>
+                                    <div class="card">
+                                        <div class="card-content cardModos" id="previewFade">
+                                            <div class="card-content-inner text-center"> </div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <a href="#" class="button button-raised" id="btnFade">Ativar modo fade</a>
+                                    </p>
+
                                 </div>
 
                             </div>
@@ -232,7 +249,7 @@
                                         </div>
                                     </div>
 
-                                    <a href="#" class="button button-raised button-fill color-orange" id="btnTemperatura">Controle por temperatura</a>
+                                    <a href="#" class="button button-raised" id="btnTemperatura">Controle por temperatura</a>
 
                                     <div class="content-block-title text-center text-uppercase">Legenda de Cores</div>
                                     <div class="card text-center color-white">
@@ -350,7 +367,7 @@
     </div>
 
     <!-- POPUP -->
-    <div class="popup popup-modos">
+  <!--  <div class="popup popup-modos">
         <div class="content-block">
             <p>
                 <a href="#" class="button close-popup">Fechar</a>
@@ -392,9 +409,8 @@
             <p>
                 <a href="#" class="button button-raised" id="btnFade">Ativar modo fade</a>
             </p>
-
         </div>
-    </div>
+    </div>-->
 
 
 

@@ -3,8 +3,21 @@ img {
     height: auto;
 }
 
-.tabbar-label{
-  padding-bottom: 15px !important;
+.tabbar-label {
+    padding-bottom: 15px !important;
+}
+
+.cardModos {
+    min-height: 100px;
+}
+
+.list-block {
+    margin: 0;
+
+}
+
+.ativo{
+  border: 2px solid #ff9800;
 }
 
 

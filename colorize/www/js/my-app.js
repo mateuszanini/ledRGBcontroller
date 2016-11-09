@@ -18,10 +18,10 @@ var myApp = new Framework7({
     }
 });
 
-myApp.onPageInit('inde', function(page) {
+myApp.onPageInit('index', function(page) {
   app.initialize();
 });
 
-$('#logo').on('taphold', function () {
+/*$('#logo').on('taphold', function () {
   myApp.popup('.popup-modos');
-});
+});*/

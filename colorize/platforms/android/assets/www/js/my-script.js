@@ -16,9 +16,15 @@ var app = {
         //variável para armazenar a cor em Hexadecimal;
         this.hexa = "0FE9FF";
 
+        this.timeFade = 20;
+        this.timeStrobo = 50;
+
+        //pega os valores dos sliders e aplica o bg no card
+        atualizaSlider();
+
         //variáveis para armazenar umidade e temperatura
-        this.temperatura = 23.91;
-        this.umidade = 68.49;
+        this.temperatura = 0.00;
+        this.umidade = 0.00;
 
         $('#dhtTemperatura').html(app.temperatura + ' °C');
         $('#dhtUmidade').html(app.umidade + ' %');
@@ -108,7 +114,7 @@ var app = {
         };
 
         this.ws.onmessage = function(e) {
-            trataDadosRecebidos(e);
+            app.trataDadosRecebidos(e);
         };
     },
 
@@ -130,7 +136,7 @@ var app = {
         app.waitForSocketConnection(function() {
             msg += '\n';
             app.ws.send(msg);
-            console.log('Message sent: ' + msg);
+            console.log('Comando enviado: ' + msg);
         });
     },
 
@@ -138,7 +144,11 @@ var app = {
         try {
             console.log(e);
             dados = JSON.parse(e.data.substring(0, e.data.length - 1));
-            console.log()
+            console.log(dados);
+            app.temperatura = dados.t;
+            app.umidade = dados.u;
+            $('#dhtTemperatura').html(app.temperatura + ' °C');
+            $('#dhtUmidade').html(app.umidade + ' %');
         } catch (err) {
             console.log(err);
             return;
@@ -167,13 +177,31 @@ $('#btnSalvarIp').click(function() {
     }, 2000);*/
 });
 
+//MODOS
+
+$('#btnFade').click(function() {
+    if (app.conectado) {
+        app.send("3 " + app.timeFade + " 0 0 0");
+    } else {
+        myApp.alert("Não conectado!");
+        myApp.pickerModal('.picker-config');
+    }
+});
+
+$('#btnStrobo').click(function() {
+    if (app.conectado) {
+        app.send("4 " + app.timeStrobo + " " + app.red + " " + app.green + " " + app.blue);
+    } else {
+        myApp.alert("Não conectado!");
+        myApp.pickerModal('.picker-config');
+    }
+});
 
 $('#btnRgb').click(function() {
     if (app.conectado) {
-        myApp.alert("1 " + app.red + " " + app.green + " " + app.blue);
-        app.send("1 " + app.red + " " + app.green + " " + app.blue);
+        app.send("2 0 " + app.red + " " + app.green + " " + app.blue);
     } else {
-        myApp.alert("Não conectado a " + app.ip);
+        myApp.alert("Não conectado!");
         myApp.pickerModal('.picker-config');
     }
 
@@ -181,10 +209,9 @@ $('#btnRgb').click(function() {
 
 $('#btnTemperatura').click(function() {
     if (app.conectado) {
-        myApp.alert("0 0 0 0");
-        app.send("0 0 0 0");
+        app.send("1 0 0 0 0");
     } else {
-        myApp.alert("Não conectado a " + app.ip);
+        myApp.alert("Não conectado!");
         myApp.pickerModal('.picker-config');
     }
 });
@@ -207,7 +234,10 @@ function valoresSlider() {
 }
 
 //executa uma função em um determinado intervalo de tempo
-window.setInterval('atualizaSlider()', 50);
+//window.setInterval('atualizaSlider()', 50);
+$("#inputRed, #inputGreen, #inputBlue").on("input change", function() {
+    atualizaSlider();
+});
 
 //atualiza os valores de R, G e B em tela e altera o card de preview
 function atualizaSlider() {
@@ -224,4 +254,62 @@ function atualizaSlider() {
 
     $('#corHex').html("#" + app.hexa);
     $('#corRgb').html("rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
+}
+
+$("#inputDelay").on("input change", function() {
+    app.timeStrobo = $("#inputDelay").val();
+    $('#delayShow').html(app.timeStrobo + " ms");
+});
+
+/*STROBO*/
+var strobo = true;
+var stroboPreview = window.setInterval('stroboShow()', app.timeStrobo);
+
+function stroboShow() {
+    if(strobo){
+      $('#previewStrobo').css("background-color", "rgb(" + app.red + ", " + +app.green + ", " + app.blue + ")");
+      strobo = false;
+    }else{
+      $('#previewStrobo').css("background-color", "white");
+      strobo = true;
+    }
+    window.clearInterval(stroboPreview);
+    stroboPreview = window.setInterval('stroboShow()',  app.timeStrobo);
+}
+
+
+
+/*FADE*/
+var fadeRed = 255;
+var fadeGreen = 0;
+var fadeBlue = 0;
+
+var fadePreview = window.setInterval('fade()', app.timeFade);
+function fade() {
+    if (fadeBlue == 0) {
+        if (fadeGreen < 255) {
+            fadeGreen += 1;
+        }
+        if(fadeRed > 0){
+          fadeRed -= 1;
+        }
+    }
+    if (fadeRed == 0) {
+        if (fadeBlue < 255) {
+            fadeBlue += 1;
+        }
+        if(fadeGreen > 0){
+          fadeGreen -= 1;
+        }
+    }
+    if (fadeGreen == 0) {
+        if (fadeRed < 255) {
+            fadeRed += 1;
+        }
+        if(fadeBlue > 0){
+          fadeBlue -= 1;
+        }
+    }
+    var fadeRgb = "rgb(" + fadeRed + "," + fadeGreen + "," + fadeBlue + ")";
+    $('#previewFade').css("background-color", fadeRgb);
 }
